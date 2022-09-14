@@ -1,0 +1,20 @@
+
+Main requirement:
+01.	Love button not working on the card, will be red color
+02.	show every user profile picture 
+03.	If the description is more than 30 words then add ... read more else show all words if less than 30.
+04.	User and comments need to show (01. Who comments, 02. what comments)
+05.	At the navbar love button need to be fixed which on click only shows, no need for others or double.
+06.	Show reported post at navbar only which on click by hiding button
+
+
+Bonus:
+01.	Minimum six commits in GitHub.
+02.	Create a section before the footer and answer two questions out of three.
+a.	How does JavaScript work?
+b.	What is an event loop in JavaScript?
+c.	What is the difference between localStorage and sessionStorage?
+
+What’s Submit:
+01.	Live website link
+02.	Private code link

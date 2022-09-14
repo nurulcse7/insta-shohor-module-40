@@ -16,7 +16,8 @@ const isLiked = (id) => {
 };
 
 const addToLiked = (id) => {
-    likedPostsId.plus(id); 
+    // likedPostsId.plus(id); 
+    likedPostsId.push(id); // bug 01 solved
     showPosts(posts);
 };
 
@@ -27,7 +28,9 @@ const reportPost = (id) => {
 };
 
 const displayContent = (text) => {
-    return text.length < 30 ? 'text' : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>";
+    // return text.length < 30 ? 'text' : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>";
+    return text.length < 30 ? text : text.slice(0, 30) + "<span class='fw-bold'>... read more</span>";
+    // remove ' ' , // bug 03 solved,
 };
 
 const switchTab = (id) => {
@@ -51,7 +54,10 @@ const switchTab = (id) => {
 };
 
 const createPost = (post) => {
+  // console.log(post);
+  // console.log(post.comments[0].user)
     const image = post.image;
+    const userImage = post.userImage; // bug 02 solved, also image instead of userImage at "User Picture" 
     const div = document.createElement( "article" );
     div.classList.add( "post" );
     div.innerHTML = `
@@ -62,23 +68,16 @@ const createPost = (post) => {
                     target="_blank"
                     class="post__avatar"
                   >
-                    <img src="${image}" alt="User Picture" />
+                    <img src="${userImage}" alt="User Picture" />
                   </a>
                   <a href="#" class="post__user">phero</a>
                 </div>
-
-                <button class="post__more-options">
-                  <i class="fa-solid fa-ellipsis"></i>
-                </button>
+                <button class="post__more-options"><i class="fa-solid fa-ellipsis"></i></button>
               </div>
 
               <div class="post__content">
                 <div class="post__medias">
-                  <img
-                    class="post__media"
-                    src="${image}"
-                    alt="Post Content"
-                  />
+                  <img class="post__media" src="${image}" alt="Post Content" />
                 </div>
               </div>
 
@@ -86,18 +85,10 @@ const createPost = (post) => {
                 <div class="post__buttons">
                   <button class="post__button" onclick="addToLiked(${post.id})">
                   <i class="fa-solid fa-heart ${isLiked(post.id) && "text-danger"}"></i>
-                    
                   </button>
-                  <button class="post__button">
-                    <i class="fa-solid fa-comment"></i>
-                  </button>
-                  
-
+                  <button class="post__button"><i class="fa-solid fa-comment"></i></button>
                   <div class="post__indicators"></div>
-
-                  <button class="post__button post__button--align-right" onclick="reportPost(${
-                      post.id
-                  })">
+                  <button class="post__button post__button--align-right" onclick="reportPost(${post.id})">
                     <i class="fa-solid fa-ban"></i>
                   </button>
                 </div>
@@ -120,9 +111,9 @@ const createPost = (post) => {
                   <div class="post__description">
                     <small>
                       <a class="post__name--underline" href="#">
-                          ${post.comments?.user}
+                          ${post.comments[0]?.user}
                       </a>
-                      ${post.comments?.text}
+                      ${post.comments[0]?.text}
                     </small>
                   </div>
                   <span class="post__date-time">30 minutes ago</span>
@@ -144,6 +135,8 @@ const showPosts = (posts) => {
 
 const displayLikedPosts = () => {
     const likedPosts = getLikedPosts();
+    // cleared previously added liked posts 
+    document.getElementById( "liked" ).textContent = ''; // bug 05 solved inserting this line
     likedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById( "liked" ).appendChild(div);
@@ -152,7 +145,10 @@ const displayLikedPosts = () => {
 
 const displayReportedPosts = () => {
     const reportedPosts = getReportedPosts();
-    posts.forEach((post) => {
+    // cleared previously added reported posts
+    document.getElementById( "reported" ).textContent = ''; // bug 06 solved inserting this line and below
+    // posts.forEach((post) => { //// bug 06 solved replacing posts to reportedPosts
+    reportedPosts.forEach((post) => { 
         const div = createPost(post);
         document.getElementById( "reported" ).appendChild(div);
     });
@@ -165,3 +161,8 @@ const loadPosts = async () =>{
 }
 
 loadPosts();
+
+
+// // bug 04 solved using only [0]
+// ${post.comments?.user} change to ${post.comments[0]?.user} 
+// ${post.comments?.text} change to  ${post.comments[0]?.text}
