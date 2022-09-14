@@ -7,6 +7,21 @@ Main requirement:
 05.	At the navbar love button need to be fixed which on click only shows, no need for others or double.
 06.	Show reported post at navbar only which on click by hiding button
 
+My requirement:
+Step-1: With every click on the button, the result will be stored in the local storage also.
+Step-2: Now the result is stored in local storage. So, if you reload the page or 
+        close the tab and open it again, the stored result not be cleared.
+
+N.B This data come from posts.json and we also take variable is empty array
+let posts=[ ];
+const likedPostsId = [];
+const reportedPostsId = [];
+So, not possible this project
+
+
+
+
+
 
 Bonus:
 01.	Minimum six commits in GitHub.

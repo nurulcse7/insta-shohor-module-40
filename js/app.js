@@ -5,8 +5,9 @@ const reportedPostsId = [];
 
 const getLikedPosts = () => {
     return posts.filter((post) => likedPostsId.includes(post.id));
+    
 };
-
+// localStorage.setItem('likedPostsId')
 const getReportedPosts = () => {
     return posts.filter((post) => reportedPostsId.includes(post.id));
 };
@@ -141,6 +142,7 @@ const displayLikedPosts = () => {
         const div = createPost(post);
         document.getElementById( "liked" ).appendChild(div);
     });
+    
 };
 
 const displayReportedPosts = () => {
